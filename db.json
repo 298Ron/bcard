@@ -1,0 +1,110 @@
+{
+  "users": [
+    {
+      "firstName": "Ron",
+      "middleName": "sert",
+      "lastName": "Shilimov",
+      "phone": "0533396906",
+      "email": "Ron@gmail.com",
+      "password": "123123",
+      "imageUrl": "https://picsum.photos/200/300",
+      "imageAlt": "idk",
+      "country": "Israel",
+      "city": "Ashdod",
+      "street": "Ashdod",
+      "houseNumber": 1,
+      "zip": 777152,
+      "role": "isBusiness",
+      "id": 1
+    },
+    {
+      "firstName": "Olga",
+      "middleName": "idk",
+      "lastName": "Shilimov",
+      "phone": "111111111",
+      "email": "Olga@gmail.com",
+      "password": "123123",
+      "imageUrl": "https://www.shopify.com/blog/how-to-write-an-about-us-page?term=&adid=648004389972&campaignid=19685772937&gclid=Cj0KCQjwzdOlBhCNARIsAPMwjbxWdj6PAnFeA7Xz9EyWaG1YW5wOINlPzKBYGdTw0YqoSQlm20xpRwAaAqEFEALw_wcB&cmadid=516752332;cmadvertiserid=10730501;cmcampaignid=26990768;cmplacementid=324494362;cmcreativeid=163722649;cmsiteid=5500011",
+      "imageAlt": "idk",
+      "state": "idk",
+      "country": "idk",
+      "city": "idk",
+      "street": "idk",
+      "houseNumber": 1,
+      "zip": 12332,
+      "role": "isBusiness",
+      "id": 2
+    },
+    {
+      "firstName": "Eli",
+      "middleName": "12",
+      "lastName": "Cohen",
+      "phone": "121212121212",
+      "email": "Eli@gmail.com",
+      "password": "123123",
+      "imageUrl": "https://www.youtube.com/watch?v=CqTPtMhtAwU",
+      "imageAlt": "123",
+      "state": "12",
+      "country": "123",
+      "city": "12",
+      "street": "12",
+      "houseNumber": 21,
+      "zip": 12,
+      "role": "isUser",
+      "id": 3
+    }
+  ],
+  "cards": [
+    {
+      "image": "https://picsum.photos/200/300",
+      "title": "new business",
+      "paragraph": "some new business",
+      "phone": "+972533326216",
+      "address": "Hertzel 55",
+      "creatorId": 1,
+      "id": 1
+    },
+    {
+      "image": "https://picsum.photos/200/300",
+      "title": "some business",
+      "paragraph": "asdasdsadsa",
+      "phone": "+2222222222",
+      "country": "Israel",
+      "city": "Ashdod",
+      "street": "dasdasdas",
+      "houseNumber": "12121",
+      "creatorId": 1,
+      "id": 3
+    }
+  ],
+  "favCards": [
+    {
+      "userId": 1,
+      "cards": [
+        {
+          "image": "https://picsum.photos/200/300",
+          "title": "new business",
+          "paragraph": "some new business",
+          "phone": "+972533326216",
+          "address": "Hertzel 55",
+          "creatorId": 1,
+          "id": 1
+        }
+      ],
+      "active": true,
+      "id": 1
+    },
+    {
+      "userId": 2,
+      "cards": [],
+      "active": true,
+      "id": 2
+    },
+    {
+      "userId": 3,
+      "cards": [],
+      "active": true,
+      "id": 3
+    }
+  ]
+}
