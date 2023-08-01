@@ -1,13 +1,14 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import Card from "../interfaces/Card";
 import { getCards } from "../services/cardService";
+import { useNavigate } from "react-router-dom";
 
 interface HomeProps {
 
 }
 
 const Home: FunctionComponent<HomeProps> = () => {
-
+    let navigate = useNavigate()
     let [cardChanged, setCardsChanged] = useState<boolean>(false);
     let [cards, setCards] = useState<Card[]>([]);
     useEffect(() => {
@@ -31,13 +32,13 @@ const Home: FunctionComponent<HomeProps> = () => {
                 <p className=" pb-3" style={{ margin: "0 auto" }}>Here you can find business cards from all categories</p>
                 <div className="">
                     {cards.length ? (
-                        <div className="row border-top border-dark w-75" style={{ margin: "0 auto" }}>
+                        <div className="row border-top border-dark w-75 column-gap-4" style={{ margin: "0 auto" }}>
                             {cards.map((card: Card) => (
-                                <div className="card col-md-4 mx-4 my-4 shadow" style={{ width: "18rem", }} key={card.id}>
-                                    <img src={card.image} className="card-img-top object-fit-cover mt-2" alt={card.title} style={{ width: "16.5rem", height: "16.5rem" }} />
+                                <div className="card col-md-4 my-4 shadow" style={{ width: "18rem" }} key={card.id}>
+                                    <img src={card.image} onClick={() => navigate(`/cards/info/${card.id}`)} className="card-img-top object-fit-cover mt-2" alt={card.title} style={{ width: "16.5rem", height: "16.5rem" }} />
                                     <div className="card-body">
                                         <h5 className="card-title">{card.title}</h5>
-                                        <p className="card-text">{card.paragraph}</p>
+                                        <p className="card-text">{card.description}</p>
 
                                     </div>
                                 </div>

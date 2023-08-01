@@ -17,10 +17,11 @@ import Profile from './components/Profile';
 import About from './components/About';
 import Card from './interfaces/Card';
 import ReactSwitch from 'react-switch';
+import CardsInfo from './components/CardsInfo';
 export let ThemeContext: any = createContext(null);
 function App() {
 
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState("light");
   const toggleTheme = () => {
     setTheme((curr) => (curr === "light" ? "dark" : "light"));
   }
@@ -43,6 +44,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/about" element={<About />} />
             <Route path="/cards" element={<MyCards userInfo={userInfo} />} />
+            <Route path="/cards/info/:id" element={<CardsInfo userInfo={userInfo} />} />
             <Route path="/cards/favorites/:id" element={<FavCards userInfo={userInfo} />} />
             <Route path="/cards/add" element={<NewCard userInfo={userInfo} />} />
             <Route path="/cards/:id" element={<UpdateCard userInfo={userInfo} />} />

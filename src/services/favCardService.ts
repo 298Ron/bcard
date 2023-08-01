@@ -51,3 +51,8 @@ export async function removeFromFavorites(userId: number, cardId: number) {
         console.log(error);
     }
 }
+
+// Put Card by id
+export function updateFavCard(updateCard: Card, id: number) {
+    return axios.put(`${api}/${id}`, updateCard);
+}

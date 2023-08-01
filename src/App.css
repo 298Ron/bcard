@@ -38,10 +38,13 @@
 
 
 
-#light .navbar,
-.downfooter {
+#light .navbar {
   background-color: #2d5986;
   color: black;
+}
+
+#light .downfooter {
+  background-color: #2d5986
 }
 
 #light .backColorImage {
@@ -49,6 +52,10 @@
 }
 
 #light .rightColumn {
+  background-color: #2d5986;
+}
+
+#light .newCard {
   background-color: #2d5986;
 }
 
@@ -81,6 +88,10 @@
 }
 
 #dark .rightColumn {
+  background-color: #12263b;
+}
+
+#dark .newCard {
   background-color: #12263b;
 }
 

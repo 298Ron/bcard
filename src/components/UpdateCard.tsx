@@ -1,45 +1,48 @@
 import { useFormik } from "formik";
 import { FunctionComponent, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import * as yup from "yup"
 import { getCards, getCardsById, updateCard } from "../services/cardService";
 import { successMsg } from "../services/feedbacksService";
 import Card from "../interfaces/Card";
+import { updateFavCard } from "../services/favCardService";
 interface UpdateCardProps {
     userInfo: any
 }
 
 const UpdateCard: FunctionComponent<UpdateCardProps> = ({ userInfo }) => {
-
+    const params = useParams();
 
     let [card, setCard] = useState<Card>({
         image: "",
         title: "",
-        paragraph: "",
+        description: "",
         phone: "",
         country: "",
         city: "",
         street: "",
         creatorId: 0,
-        houseNumber: ""
+        houseNumber: "",
+        mapLink: "",
+        category: ""
 
     })
 
     useEffect(() => {
         // get product by id
-        getCardsById(3)
+        getCardsById(Number(params.id))
             .then((res) => setCard(res.data))
             .catch((err) => console.log(err))
     }, []);
     let { id } = useParams();
     let navigate = useNavigate()
     let formik = useFormik({
-        initialValues: { image: card.image, title: card.title, paragraph: card.paragraph, phone: card.phone, country: card.country, city: card.city, street: card.street, houseNumber: card.houseNumber, creatorId: card.creatorId },
+        initialValues: { image: card.image, title: card.title, description: card.description, phone: card.phone, country: card.country, city: card.city, street: card.street, houseNumber: card.houseNumber, creatorId: card.creatorId, mapLink: card.mapLink, category: card.category },
 
         validationSchema: yup.object({
             image: yup.string().url(),
             title: yup.string().required().min(2),
-            paragraph: yup.string().required().min(2),
+            description: yup.string().required().min(2),
             phone: yup.string().required().min(9).max(12),
             country: yup.string().required().min(3),
             city: yup.string().required().min(3),
@@ -48,8 +51,10 @@ const UpdateCard: FunctionComponent<UpdateCardProps> = ({ userInfo }) => {
         }),
         enableReinitialize: true,
         onSubmit(values) {
-            updateCard(values, Number(id))
+            updateCard(values, Number(id));
+            updateFavCard(values, Number(id))
                 .then((res) => {
+
                     navigate("/cards")
                     successMsg("Card was updated successfuly!");
                     console.log(values)
@@ -57,10 +62,12 @@ const UpdateCard: FunctionComponent<UpdateCardProps> = ({ userInfo }) => {
                 .catch((err) => console.log(err))
         }
     })
-
+    let clear = () => {
+        formik.resetForm()
+    }
     return (
         <>
-            <div className="container col-md-8 " style={{ height: "75vh" }}>
+            <div className="container col-md-8 " style={{ height: "83vh" }}>
                 <h4 className="display-4 border-bottom pb-3 mt-5">UPDATE CARD</h4>
                 <form className="form" onSubmit={formik.handleSubmit}>
                     <div className="row">
@@ -90,14 +97,14 @@ const UpdateCard: FunctionComponent<UpdateCardProps> = ({ userInfo }) => {
                             </div>
                             <div className="form-floating mb-3">
                                 <input type="text"
-                                    name="paragraph"
+                                    name="description"
                                     className="form-control shadow" placeholder="Description"
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
-                                    value={formik.values.paragraph} />
+                                    value={formik.values.description} />
                                 <label className="darkText" >Description</label>
-                                {formik.touched.paragraph && formik.errors.paragraph && (
-                                    <small className="text-danger">{formik.errors.paragraph}</small>)}
+                                {formik.touched.description && formik.errors.description && (
+                                    <small className="text-danger">{formik.errors.description}</small>)}
                             </div>
                             <div className="form-floating mb-3">
                                 <input type="text"
@@ -158,9 +165,23 @@ const UpdateCard: FunctionComponent<UpdateCardProps> = ({ userInfo }) => {
                                     <small className="text-danger">{formik.errors.houseNumber}</small>)}
                             </div>
                         </div>
+                        <div className="form-floating mb-3 container col-md-6">
+                            <input type="text"
+                                name="mapLink"
+                                className="form-control" placeholder="Map URL"
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                                value={formik.values.mapLink} />
+                            <label className="darkText ms-2" >Map URL</label>
+                            {formik.touched.mapLink && formik.errors.mapLink && (
+                                <small className="text-danger">{formik.errors.mapLink}</small>)}
+                        </div>
                     </div>
-                    <button type="submit" className="btn btn-success w-25 mb-3" disabled={!formik.isValid || !formik.dirty}>Update card</button>
+                    <button type="submit" className="btn btn-success w-50 mb-3" disabled={!formik.isValid || !formik.dirty}>Update card</button>
                 </form>
+                <button className="btn btn-primary col-md-3 mx-1 mb-3" onClick={clear}>Restore last saved</button>
+                <NavLink to="/cards" className="btn btn-danger col-md-3 mx-1 mb-3">Cancel</NavLink>
+
             </div>
         </>
     )

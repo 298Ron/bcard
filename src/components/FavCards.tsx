@@ -2,7 +2,7 @@ import { FunctionComponent, useEffect, useState } from "react";
 import Card from "../interfaces/Card";
 import { getFavorites, removeFromFavorites } from "../services/favCardService";
 import { successMsg } from "../services/feedbacksService";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { render } from "react-dom";
 
 interface FavCardsProps {
@@ -11,7 +11,7 @@ interface FavCardsProps {
 
 const FavCards: FunctionComponent<FavCardsProps> = ({ userInfo, }) => {
 
-
+    let navigate = useNavigate()
     let [cardChanged, setCardsChanged] = useState<boolean>(false);
     let userId: number = JSON.parse(sessionStorage.getItem("userInfo") as string).userId
 
@@ -38,11 +38,11 @@ const FavCards: FunctionComponent<FavCardsProps> = ({ userInfo, }) => {
                 {favCards.length ? (
                     <div className="row " style={{ margin: "0 auto" }}>
                         {favCards.map((card: Card) => (
-                            <div className="card col-md-4 mx-4 shadow" style={{ width: "18rem", }} key={card.id}>
-                                <img src={card.image} className="card-img-top object-fit-covers mt-3" alt={card.title} style={{ width: "16.5rem", height: "16.5rem" }} />
+                            <div className="card my-3 col-md-4 shadow" style={{ width: "18rem", margin: "0 auto" }} key={card.id}>
+                                <img src={card.image} onClick={() => navigate(`/cards/info/${card.id}`)} className="card-img-top object-fit-covers mt-3" alt={card.title} style={{ width: "16.5rem", height: "16.5rem" }} />
                                 <div className="card-body">
                                     <h5 className="card-title">{card.title}</h5>
-                                    <p className="card-text">{card.paragraph}</p>
+                                    <p className="card-text">{card.description}</p>
                                     <Link to="" onClick={() => handleRemove(userId, Number(card.id))}><i className="fa-solid mx-5 fa-trash text-danger" ></i></Link>
                                     {userInfo.role == "isAdmin" && (<Link to={`/cards/edit/${card.id}`}><i className="fa-solid fa-pen  text-warning"></i></Link>)}
                                 </div>

@@ -2,7 +2,7 @@
 export default interface Card {
     image: string;
     title: string;
-    paragraph: string;
+    description: string;
     phone: string;
     country: string;
     city: string;
@@ -11,4 +11,6 @@ export default interface Card {
     creatorId?: number;
     userAddedToFavoritesId?: number,
     id?: number;
+    mapLink?: string;
+    category: string;
 };

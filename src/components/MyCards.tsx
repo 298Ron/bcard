@@ -3,12 +3,25 @@ import Card from "../interfaces/Card";
 import { deleteCard, getCards } from "../services/cardService";
 import { successMsg } from "../services/feedbacksService";
 import { addToFavCards, getFavorites, removeFromFavorites } from "../services/favCardService";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 interface MyCardsProps {
     userInfo: any;
 }
 
 const MyCards: FunctionComponent<MyCardsProps> = ({ userInfo }) => {
+    let handleRemove = (cardId: number) => {
+        deleteCard(cardId)
+            .then((res) => {
+                render();
+                removeFromFavorites(userId, cardId)
+            })
+            .catch((err) => console.log(err)
+            )
+    }
+    let render = () => {
+        setCardsChanged(!cardChanged)
+    }
+    let navigate = useNavigate()
     let [favorites, setFavorites] = useState<number[]>([])
     let [cards, setCards] = useState<Card[]>([])
     let [cardChanged, setCardsChanged] = useState<boolean>(false);
@@ -52,13 +65,13 @@ const MyCards: FunctionComponent<MyCardsProps> = ({ userInfo }) => {
                 <p className="border-bottom border-dark pb-3">Here you can find business cards from all categories</p>
                 <div className="row">
                     {cards.length ? (
-                        <div className="row " style={{ margin: "0 auto" }}>
+                        <div className="row" style={{ margin: "0 auto" }}>
                             {cards.map((card: Card) => (
-                                <div className="card col-md-4 m-5 shadow" style={{ width: "18rem", }} key={card.id}>
-                                    <img src={card.image} className="card-img-top object-fit-cover mt-3" alt={card.title} style={{ width: "16.5rem", height: "16.5rem" }} />
+                                <div className="card my-3 col-md-4 shadow" style={{ width: "18rem", margin: "0 auto" }} key={card.id} >
+                                    <img src={card.image} onClick={() => navigate(`info/${card.id}`)} className="card-img-top object-fit-cover mt-3" alt={card.title} style={{ width: "16.5rem", height: "16.5rem" }} />
                                     <div className="card-body">
                                         <h5 className="card-title">{card.title}</h5>
-                                        <p className="card-text">{card.paragraph}</p>
+                                        <p className="card-text">{card.category}</p>
                                         {userInfo.email && (favorites.includes(card.id as number) ? (
                                             <Link to="" className="btn col text-success" onClick={() => {
                                                 handleAddToFavorites(card);
@@ -71,14 +84,14 @@ const MyCards: FunctionComponent<MyCardsProps> = ({ userInfo }) => {
                                             </Link>)
                                         )}
                                         {userInfo.role == "isAdmin" || userId === card.creatorId && (<Link to={`/cards/${card.id}`}><i className="fa-solid fa-pen mx-5 text-warning"></i></Link>)}
-                                        {userInfo.role == "isAdmin" || userId === card.creatorId && (<Link to="" ><i className="fa-solid fa-trash text-danger ms-3" ></i></Link>)}
+                                        {userInfo.role == "isAdmin" || userId === card.creatorId && (<Link to="" onClick={() => handleRemove(Number(card.id))} ><i className="fa-solid fa-trash text-danger ms-3" ></i></Link>)}
                                     </div>
                                 </div>
                             ))}
                         </div>
                     ) : (<p>There is no cards to display</p>)}
                 </div>
-                {(userInfo.role == "isBusiness" || userInfo.role == "isAdmin") && (<Link to="add" className="btn btn-dark rounded-5 fw-bold position-fixed end-0 m-3" style={{ top: "70%" }}><i className="fa-solid fa-plus me-2"></i>Add card</Link>)}
+                {(userInfo.role == "isBusiness" || userInfo.role == "isAdmin") && (<Link to="add" className="btn text-light rounded-5 fw-bold position-fixed end-0 m-3 newCard" style={{ top: "70%" }}><i className="fa-solid fa-plus me-2"></i>Add card</Link>)}
             </div>
 
         </>

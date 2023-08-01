@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "firstName": "Ron",
+      "firstName": "Ron2",
       "middleName": "sert",
       "lastName": "Shilimov",
       "phone": "0533396906",
@@ -12,9 +12,9 @@
       "country": "Israel",
       "city": "Ashdod",
       "street": "Ashdod",
-      "houseNumber": 1,
+      "houseNumber": 12,
       "zip": 777152,
-      "role": "isBusiness",
+      "role": "isAdmin",
       "id": 1
     },
     {
@@ -24,13 +24,13 @@
       "phone": "111111111",
       "email": "Olga@gmail.com",
       "password": "123123",
-      "imageUrl": "https://www.shopify.com/blog/how-to-write-an-about-us-page?term=&adid=648004389972&campaignid=19685772937&gclid=Cj0KCQjwzdOlBhCNARIsAPMwjbxWdj6PAnFeA7Xz9EyWaG1YW5wOINlPzKBYGdTw0YqoSQlm20xpRwAaAqEFEALw_wcB&cmadid=516752332;cmadvertiserid=10730501;cmcampaignid=26990768;cmplacementid=324494362;cmcreativeid=163722649;cmsiteid=5500011",
+      "imageUrl": "https://picsum.photos/200/300",
       "imageAlt": "idk",
       "state": "idk",
       "country": "idk",
       "city": "idk",
       "street": "idk",
-      "houseNumber": 1,
+      "houseNumber": 1342,
       "zip": 12332,
       "role": "isBusiness",
       "id": 2
@@ -42,7 +42,7 @@
       "phone": "121212121212",
       "email": "Eli@gmail.com",
       "password": "123123",
-      "imageUrl": "https://www.youtube.com/watch?v=CqTPtMhtAwU",
+      "imageUrl": "https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=1%20Grafton%20Street,%20Dublin,%20Ireland+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed",
       "imageAlt": "123",
       "state": "12",
       "country": "123",
@@ -57,24 +57,71 @@
   "cards": [
     {
       "image": "https://picsum.photos/200/300",
-      "title": "new business",
-      "paragraph": "some new business",
-      "phone": "+972533326216",
-      "address": "Hertzel 55",
+      "title": "some",
+      "description": "some",
+      "phone": "+2321312312",
+      "country": "Finland",
+      "city": "Lol",
+      "street": "xd1",
+      "houseNumber": "222",
       "creatorId": 1,
+      "mapLink": "https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=1%20Grafton%20Street,%20Dublin,%20Ireland+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed",
+      "category": "Cars",
       "id": 1
     },
     {
       "image": "https://picsum.photos/200/300",
-      "title": "some business",
-      "paragraph": "asdasdsadsa",
-      "phone": "+2222222222",
+      "title": "Test",
+      "description": "Test2",
+      "phone": "+3232131231",
+      "country": "Lolland",
+      "city": "sdadsa",
+      "street": "asdasdas",
+      "houseNumber": "dasdasdas",
+      "mapLink": "https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=1%20Grafton%20Street,%20Dublin,%20Ireland+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed",
+      "category": "images",
+      "id": 2
+    },
+    {
+      "image": "https://picsum.photos/200/300",
+      "title": "dasdasdasd",
+      "description": "dsa",
+      "phone": "0533396906",
+      "country": "Israelasd",
+      "city": "Ashdoddasdasd",
+      "street": "dasdas",
+      "houseNumber": "12121",
+      "mapLink": "https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=1%20Grafton%20Street,%20Dublin,%20Ireland+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed",
+      "category": "dasd",
+      "id": 3
+    },
+    {
+      "image": "https://picsum.photos/200/300",
+      "title": "12121",
+      "description": "212121",
+      "phone": "0533396906",
       "country": "Israel",
       "city": "Ashdod",
-      "street": "dasdasdas",
-      "houseNumber": "12121",
+      "street": "2121",
+      "houseNumber": "2121",
       "creatorId": 1,
-      "id": 3
+      "mapLink": "https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=1%20Grafton%20Street,%20Dublin,%20Ireland+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed",
+      "category": "122121",
+      "id": 4
+    },
+    {
+      "image": "https://picsum.photos/200/300",
+      "title": "dasdas",
+      "description": "dasdas",
+      "phone": "0533396906",
+      "country": "Israel",
+      "city": "Ashdod",
+      "street": "2121",
+      "houseNumber": "2121",
+      "creatorId": 1,
+      "mapLink": "https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=1%20Grafton%20Street,%20Dublin,%20Ireland+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed",
+      "category": "dasdasdsa",
+      "id": 5
     }
   ],
   "favCards": [
@@ -83,12 +130,16 @@
       "cards": [
         {
           "image": "https://picsum.photos/200/300",
-          "title": "new business",
-          "paragraph": "some new business",
-          "phone": "+972533326216",
-          "address": "Hertzel 55",
-          "creatorId": 1,
-          "id": 1
+          "title": "Test",
+          "description": "Test2",
+          "phone": "+3232131231",
+          "country": "Lolland",
+          "city": "sdadsa",
+          "street": "asdasdas",
+          "houseNumber": "dasdasdas",
+          "mapLink": "https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=1%20Grafton%20Street,%20Dublin,%20Ireland+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed",
+          "category": "images",
+          "id": 2
         }
       ],
       "active": true,
@@ -96,14 +147,49 @@
     },
     {
       "userId": 2,
-      "cards": [],
+      "cards": [
+        {
+          "image": "https://picsum.photos/200/300",
+          "title": "Test",
+          "description": "Test2",
+          "phone": "+3232131231",
+          "country": "Lolland",
+          "city": "sdadsa",
+          "street": "asdasdas",
+          "houseNumber": "dasdasdas",
+          "mapLink": "https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=1%20Grafton%20Street,%20Dublin,%20Ireland+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed",
+          "category": "images",
+          "id": 2
+        },
+        {
+          "image": "https://picsum.photos/200/300",
+          "title": "dasdasdasd",
+          "description": "dsa",
+          "phone": "0533396906",
+          "country": "Israelasd",
+          "city": "Ashdoddasdasd",
+          "street": "dasdas",
+          "houseNumber": "12121",
+          "mapLink": "https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=1%20Grafton%20Street,%20Dublin,%20Ireland+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed",
+          "category": "dasd",
+          "id": 3
+        }
+      ],
       "active": true,
       "id": 2
     },
     {
-      "userId": 3,
-      "cards": [],
-      "active": true,
+      "image": "https://picsum.photos/200/300",
+      "title": "some business for cars22333",
+      "description": "Some good business for good cards and we also repair them and paint ",
+      "phone": "+2222222222",
+      "country": "Israel",
+      "city": "Ashdod",
+      "street": "dasdas",
+      "houseNumber": "12121",
+      "creatorId": 1,
+      "mapLink": "https://goo.gl/maps/r92XbRv378vFRRVPA",
+      "category": "cars",
       "id": 3
     }
   ]

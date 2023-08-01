@@ -2,13 +2,14 @@ import { FunctionComponent } from "react";
 import { useFormik } from "formik";
 import { checkUser } from "../services/usersService";
 import * as yup from "yup";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { errorMsg, successMsg } from "../services/feedbacksService";
 interface LoginProps {
     setUserInfo: Function;
 }
 
 const Login: FunctionComponent<LoginProps> = ({ setUserInfo }) => {
+
     let navigate = useNavigate();
     let formik = useFormik({
         initialValues: { email: "", password: "" },
@@ -16,7 +17,7 @@ const Login: FunctionComponent<LoginProps> = ({ setUserInfo }) => {
             email: yup.string().required().email(),
             password: yup.string().required().min(6),
         }),
-        onSubmit(values) {
+        onSubmit(values,) {
             checkUser(values)
                 .then((res) => {
                     if (res.data.length) {
@@ -37,14 +38,19 @@ const Login: FunctionComponent<LoginProps> = ({ setUserInfo }) => {
                         );
                     } else errorMsg("Wrong email or password")
                 })
+
                 .catch((err) => console.log(err));
         },
+
     })
+    let clear = () => {
+        formik.resetForm()
+    }
     return (
         <>
             <div className="container col-md-4 mt-5" style={{ height: "70vh", }}>
                 <h2 className="display-6 my-3">LOGIN</h2>
-                <form className="form row" onSubmit={formik.handleSubmit}>
+                <form className="form row" onSubmit={formik.handleSubmit} id="myForm">
                     <div className="form-floating">
                         <input type="email" className="form-control shadow mb-2"
                             id="floatingEmail"
@@ -74,8 +80,8 @@ const Login: FunctionComponent<LoginProps> = ({ setUserInfo }) => {
                         <button className="btn btn-secondary col-md-12 my-2" type="submit" disabled={!formik.isValid || !formik.dirty}>SUBMIT</button>
                     </div>
                 </form>
-                <button className="btn btn-danger col-md-5 mx-1 mb-3">Cancel</button>
-                <button className="btn btn-primary col-md-5 mx-1 mb-3"><i className="fa-solid fa-rotate"></i></button>
+                <NavLink to="/" className="btn btn-danger col-md-5 mx-1 mb-3">Cancel</NavLink>
+                <button className="btn btn-primary col-md-5 mx-1 mb-3" onClick={clear}><i className="fa-solid fa-rotate"></i></button>
             </div>
         </>
     )

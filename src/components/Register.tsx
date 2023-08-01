@@ -54,6 +54,9 @@ const Register: FunctionComponent<RegisterProps> = () => {
 
         }
     })
+    let clear = () => {
+        formik.resetForm()
+    }
     return (
         <>
             <div className="container col-md-6">
@@ -256,7 +259,7 @@ const Register: FunctionComponent<RegisterProps> = () => {
 
                 </form>
                 <button className="btn btn-danger col-md-5 mx-1 mb-3" onClick={() => navigate("/")}>Cancel</button>
-                <button className="btn btn-primary col-md-5 mx-1 mb-3"><i className="fa-solid fa-rotate"></i></button>
+                <button className="btn btn-primary col-md-5 mx-1 mb-3" onClick={clear}><i className="fa-solid fa-rotate"></i></button>
             </div>
         </>
     )

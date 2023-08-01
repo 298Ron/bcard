@@ -11,6 +11,7 @@ interface ProfileProps {
 }
 
 const Profile: FunctionComponent<ProfileProps> = ({ userInfo }) => {
+
     let [user, setUser] = useState<User>({ firstName: '', middleName: '', lastName: '', phone: '', email: '', password: '', imageUrl: '', imageAlt: '', state: '', country: '', city: '', street: '', houseNumber: 0, zip: 0, role: "isUser", })
     let userId = JSON.parse(
         sessionStorage.getItem("userInfo") as string
@@ -44,7 +45,6 @@ const Profile: FunctionComponent<ProfileProps> = ({ userInfo }) => {
         onSubmit(values, { resetForm }) {
             updateUser(values, userId)
                 .then((res) => {
-                    resetForm()
                     sessionStorage.setItem(
                         "userInfo",
                         JSON.stringify({
@@ -63,11 +63,14 @@ const Profile: FunctionComponent<ProfileProps> = ({ userInfo }) => {
         },
         enableReinitialize: true
     })
+    let clear = () => {
+        formik.resetForm()
+    }
     return (
         <>
             <div className="container col-md-6">
-                <h2 className="display-6 my-3">PROFILE</h2>
-                <form className="form row" onSubmit={formik.handleSubmit}>
+                <h2 className="display-6 my-3 border-bottom border-dark p-3">PROFILE</h2>
+                <form className="form row w-100 mt-4" onSubmit={formik.handleSubmit} style={{ margin: "0 auto" }}>
                     {/* LEFT COLUMN */}
                     <div className="col-md-6">
                         <div className="form-floating mb-3">
@@ -242,7 +245,7 @@ const Profile: FunctionComponent<ProfileProps> = ({ userInfo }) => {
                                 <small className="text-danger">{formik.errors.zip}</small>)}
                         </div>
                     </div>
-                    <div className="form-check ms-3 text-start fw-bold">
+                    {userInfo.role == "isAdmin" ? (<p className="display-6 text-danger mt-4">USER IS ADMIN</p>) : (<div className="form-check ms-3 text-start fw-bold">
                         <input className="form-check-input" type="checkbox" id="roleCheckbox"
                             name="role"
                             checked={formik.values.role === "isBusiness"}
@@ -255,15 +258,16 @@ const Profile: FunctionComponent<ProfileProps> = ({ userInfo }) => {
                         </label>
                         {formik.touched.role && formik.errors.role && (
                             <p className="text-danger">{formik.errors.role}</p>)}
-                    </div>
+                    </div>)}
                     <div className="my-2">
+                        <button className="btn btn-secondary col-md-12 my-2" disabled={!formik.isValid || !formik.dirty}>SUBMIT</button>
 
-                        <button className="btn btn-secondary col-md-12 my-2" type="button" disabled={!formik.isValid || !formik.dirty}>SUBMIT</button>
                     </div>
 
                 </form>
+                <button className="btn btn-primary col-md-5 mx-1 mb-3" onClick={clear} >Restore last saved</button>
                 <NavLink to="/" className="btn btn-danger col-md-5 mx-1 mb-3">Cancel</NavLink>
-                <button className="btn btn-primary col-md-5 mx-1 mb-3"  ><i className="fa-solid fa-rotate"></i></button>
+
             </div>
         </>
     )
