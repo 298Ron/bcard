@@ -33,7 +33,7 @@ const NewCard: FunctionComponent<NewCardProps> = ({ userInfo }) => {
                 .then((res) => {
                     navigate("/cards")
                     successMsg("Card was added successfuly!");
-                    console.log(values);
+
                     resetForm()
                 })
                 .catch((err) => console.log(err))

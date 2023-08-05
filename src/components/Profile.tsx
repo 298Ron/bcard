@@ -58,7 +58,7 @@ const Profile: FunctionComponent<ProfileProps> = ({ userInfo }) => {
                     successMsg(`Information was updated successfuly!`);
                 }).catch((err) => console.log(err)
                 )
-            console.log(values);
+
 
         },
         enableReinitialize: true

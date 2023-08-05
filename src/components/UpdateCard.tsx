@@ -57,7 +57,7 @@ const UpdateCard: FunctionComponent<UpdateCardProps> = ({ userInfo }) => {
 
                     navigate("/cards")
                     successMsg("Card was updated successfuly!");
-                    console.log(values)
+
                 })
                 .catch((err) => console.log(err))
         }

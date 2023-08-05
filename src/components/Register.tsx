@@ -50,7 +50,7 @@ const Register: FunctionComponent<RegisterProps> = () => {
                     createFavCardList(res.data.id);
                 }).catch((err) => console.log(err)
                 )
-            console.log(values);
+
 
         }
     })
