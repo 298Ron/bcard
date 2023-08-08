@@ -30,11 +30,11 @@ const Home: FunctionComponent<HomeProps> = () => {
             <div className="py-5">
                 <h4 className="display-4 ">OUR BUSINESS GALLERY</h4>
                 <p className=" pb-3" style={{ margin: "0 auto" }}>Here you can find business cards from all categories</p>
-                <div className="">
+                <div className="" >
                     {cards.length ? (
                         <div className="row border-top border-dark w-75 column-gap-4" style={{ margin: "0 auto" }}>
                             {cards.map((card: Card) => (
-                                <div className="card col-md-4 my-4 shadow" style={{ width: "18rem" }} key={card.id}>
+                                <div className="card col-md-4 my-4 shadow" style={{ width: "18rem", margin: "0 auto" }} key={card.id}>
                                     <img src={card.image} onClick={() => navigate(`/cards/info/${card.id}`)} className="card-img-top object-fit-cover mt-2" alt={card.title} style={{ width: "16.5rem", height: "16.5rem" }} />
                                     <div className="card-body">
                                         <h5 className="card-title">{card.title}</h5>

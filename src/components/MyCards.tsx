@@ -83,8 +83,8 @@ const MyCards: FunctionComponent<MyCardsProps> = ({ userInfo }) => {
                                                 <i className="fa-solid fa-heart"></i>
                                             </Link>)
                                         )}
-                                        {userInfo.role == "isAdmin" || userId === card.creatorId && (<Link to={`/cards/${card.id}`}><i className="fa-solid fa-pen mx-5 text-warning"></i></Link>)}
-                                        {userInfo.role == "isAdmin" || userId === card.creatorId && (<Link to="" onClick={() => handleRemove(Number(card.id))} ><i className="fa-solid fa-trash text-danger ms-3" ></i></Link>)}
+                                        {(userInfo.role == "isAdmin" || userId === card.creatorId) && (<Link to={`/cards/edit/s${card.id}`}><i className="fa-solid fa-pen mx-5 text-warning"></i></Link>)}
+                                        {(userInfo.role == "isAdmin" || userId === card.creatorId) && (<Link to="" onClick={() => handleRemove(Number(card.id))} ><i className="fa-solid fa-trash text-danger ms-3" ></i></Link>)}
                                     </div>
                                 </div>
                             ))}

@@ -43,8 +43,8 @@ const FavCards: FunctionComponent<FavCardsProps> = ({ userInfo, }) => {
                                 <div className="card-body">
                                     <h5 className="card-title">{card.title}</h5>
                                     <p className="card-text">{card.description}</p>
-                                    <Link to="" onClick={() => handleRemove(userId, Number(card.id))}><i className="fa-solid mx-5 fa-trash text-danger" ></i></Link>
-                                    {userInfo.role == "isAdmin" && (<Link to={`/cards/edit/${card.id}`}><i className="fa-solid fa-pen  text-warning"></i></Link>)}
+                                    <Link to="" onClick={() => handleRemove(userId, Number(card.id))}><i className="fa-solid col-3 fa-trash text-danger" ></i></Link>
+                                    {userInfo.role == "isAdmin" && (<Link to={`/cards/edit/${card.id}`}><i className="fa-solid col-3 fa-pen  text-warning"></i></Link>)}
                                 </div>
                             </div>
                         ))}

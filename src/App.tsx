@@ -47,7 +47,7 @@ function App() {
             <Route path="/cards/info/:id" element={<CardsInfo userInfo={userInfo} />} />
             <Route path="/cards/favorites/:id" element={<FavCards userInfo={userInfo} />} />
             <Route path="/cards/add" element={<NewCard userInfo={userInfo} />} />
-            <Route path="/cards/:id" element={<UpdateCard userInfo={userInfo} />} />
+            <Route path="/cards/edit/:id" element={<UpdateCard userInfo={userInfo} />} />
             <Route path='*' element={<PageNotFound />} />
           </Routes>
           <Footer />
