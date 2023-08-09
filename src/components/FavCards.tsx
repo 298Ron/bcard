@@ -49,7 +49,7 @@ const FavCards: FunctionComponent<FavCardsProps> = ({ userInfo, }) => {
                             </div>
                         ))}
                     </div>
-                ) : (<p>There is no cards to display</p>)}
+                ) : (<p style={{ height: "40vh" }}>There is no cards to display</p>)}
             </div>
         </div>
     )

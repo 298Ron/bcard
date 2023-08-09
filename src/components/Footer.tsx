@@ -8,7 +8,7 @@ interface FooterProps {
 const Footer: FunctionComponent<FooterProps> = () => {
     return (
         <>
-            <footer className="text-light downfooter py-3" style={{ width: "100%", bottom: "0" }} >
+            <footer className="text-light downfooter py-3" style={{ width: "100%" }} >
                 <div className="container ">
                     <div className="">
                         <div className="col-4"></div>

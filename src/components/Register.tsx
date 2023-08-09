@@ -1,16 +1,18 @@
 import { useFormik } from "formik";
 import { FunctionComponent, useState } from "react";
 import * as yup from "yup";
-import { addUser } from "../services/usersService";
+import { CheckEmail, addUser } from "../services/usersService";
 import { useNavigate } from "react-router-dom";
-import { successMsg } from "../services/feedbacksService";
+import { errorMsg, successMsg } from "../services/feedbacksService";
 import { createFavCardList } from "../services/favCardService";
 import { userInfo } from "os";
+import User from "../interfaces/User";
 interface RegisterProps {
 
 }
 
 const Register: FunctionComponent<RegisterProps> = () => {
+
     let navigate = useNavigate()
     let formik = useFormik({
         initialValues: { firstName: "", middleName: "", lastName: "", phone: "", email: "", password: "", imageUrl: "", imageAlt: "", state: "", country: "", city: "", street: "", houseNumber: 0, zip: 0, role: "isUser", },
@@ -31,23 +33,28 @@ const Register: FunctionComponent<RegisterProps> = () => {
             zip: yup.number().min(2),
             isBuisnesUser: yup.boolean(),
         }),
-        onSubmit(values) {
-            addUser(values)
+        onSubmit(values: User) {
+            CheckEmail(values)
                 .then((res) => {
-                    navigate("/")
-                    sessionStorage.setItem(
-                        "userInfo",
-                        JSON.stringify({
-                            imgURL: res.data.imageUrl,
-                            email: res.data.email,
-                            userId: res.data.id,
-                            role: res.data.role
-                        }
-                        )
-                    );
+                    if (res.data.length) {
+                        errorMsg("Email is already exist")
+                    } else {
+                        addUser(values)
+                        sessionStorage.setItem(
+                            "userInfo",
+                            JSON.stringify({
+                                imgURL: res.data.imageUrl,
+                                email: res.data.email,
+                                userId: res.data.id,
+                                role: res.data.role
+                            }
+                            )
+                        );
 
-                    successMsg(`${values.email} wes registered and logged in`);
-                    createFavCardList(res.data.id);
+                        successMsg(`${values.email} was registered!`);
+                        createFavCardList(res.data);
+                        navigate("/login")
+                    }
                 }).catch((err) => console.log(err)
                 )
 

@@ -89,7 +89,7 @@ const MyCards: FunctionComponent<MyCardsProps> = ({ userInfo }) => {
                                 </div>
                             ))}
                         </div>
-                    ) : (<p>There is no cards to display</p>)}
+                    ) : (<p style={{ height: "40vh" }}>There is no cards to display</p>)}
                 </div>
                 {(userInfo.role == "isBusiness" || userInfo.role == "isAdmin") && (<Link to="add" className="btn text-light rounded-5 fw-bold position-fixed end-0 m-3 newCard" style={{ top: "70%" }}><i className="fa-solid fa-plus me-2"></i>Add card</Link>)}
             </div>

@@ -13,20 +13,17 @@ export function createFavCardList(userId: number) {
     return axios.post(api, { userId, cards: [] })
 };
 // add to cart / update cart
-export async function addToFavCards(userId: number, cardToAdd: Product) {
+export async function addToFavCards(userId: number, cardToAdd: Card) {
     try {
 
         // 1. search for the exising card 
         let res = await getFavorites(userId);
-        // 2. add the new card to the favCards array
+        // 2. add the favorit card to favorits array
         res.data[0].cards.push({ ...cardToAdd });
+        // 3. update the favorits object 
         return axios.patch(`${api}/${res.data[0].userId}`, {
             cards: res.data[0].cards,
-        }
-        );
-        // 3. update the cards - put or patch
-
-
+        });
 
     } catch (error) {
         console.log(error);

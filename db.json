@@ -37,21 +37,39 @@
     },
     {
       "firstName": "Eli",
-      "middleName": "12",
-      "lastName": "Cohen",
-      "phone": "121212121212",
+      "middleName": "Abramov",
+      "lastName": "Hanukaev",
+      "phone": "+2222222222",
       "email": "Eli@gmail.com",
       "password": "123123",
-      "imageUrl": "https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=1%20Grafton%20Street,%20Dublin,%20Ireland+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed",
-      "imageAlt": "123",
-      "state": "12",
-      "country": "123",
-      "city": "12",
-      "street": "12",
-      "houseNumber": 21,
-      "zip": 12,
+      "imageUrl": "https://picsum.photos/200/300",
+      "imageAlt": "Random ",
+      "state": "America",
+      "country": "idk",
+      "city": "idk",
+      "street": "idk",
+      "houseNumber": 2,
+      "zip": 111111,
       "role": "isUser",
       "id": 3
+    },
+    {
+      "firstName": "Ksenia",
+      "middleName": "idk",
+      "lastName": "Bobov",
+      "phone": "+2222222222",
+      "email": "Ksenia@gmail.com",
+      "password": "123123",
+      "imageUrl": "https://picsum.photos/200/300",
+      "imageAlt": "idk",
+      "state": "idk",
+      "country": "idk",
+      "city": "idk",
+      "street": "idk",
+      "houseNumber": 2,
+      "zip": 2,
+      "role": "isUser",
+      "id": 4
     }
   ],
   "cards": [
@@ -188,20 +206,19 @@
       "cards": [
         {
           "image": "https://picsum.photos/200/300",
-          "title": "Test",
-          "description": "Test2",
-          "phone": "+3232131231",
-          "country": "Lolland",
-          "city": "sdadsa",
-          "street": "asdasdas",
-          "houseNumber": "dasdasdas",
+          "title": "XYZ Coffee Shop",
+          "description": "Relax and enjoy a variety of handcrafted coffees and pastries.",
+          "phone": "+44 20 1234 5678",
+          "country": "United Kingdom",
+          "city": "London",
+          "street": "456 High Street",
+          "houseNumber": "22",
           "creatorId": 1,
-          "mapLink": "https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=1%20Grafton%20Street,%20Dublin,%20Ireland+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed",
-          "category": "images",
+          "mapLink": "https://maps.google.com/maps?q=456%20High%20Street,%20London&t=&z=14&ie=UTF8&iwloc=B&output=embed",
+          "category": "Food & Beverage",
           "id": 2
         }
       ],
-      "active": true,
       "id": 1
     },
     {
@@ -220,7 +237,13 @@
           "mapLink": "https://maps.google.com/maps?q=123%20Main%20Street,%20New%20York&t=&z=14&ie=UTF8&iwloc=B&output=embed",
           "category": "Automotive",
           "id": 1
-        },
+        }
+      ],
+      "id": 2
+    },
+    {
+      "userId": 3,
+      "cards": [
         {
           "image": "https://picsum.photos/200/300",
           "title": "XYZ Coffee Shop",
@@ -234,24 +257,84 @@
           "mapLink": "https://maps.google.com/maps?q=456%20High%20Street,%20London&t=&z=14&ie=UTF8&iwloc=B&output=embed",
           "category": "Food & Beverage",
           "id": 2
+        },
+        {
+          "image": "https://picsum.photos/200/300",
+          "title": "ABC Car Dealership",
+          "description": "We sell new and used cars at competitive prices.",
+          "phone": "+1 (123) 456-7890",
+          "country": "United States",
+          "city": "New York",
+          "street": "123 Main Street",
+          "houseNumber": "555",
+          "creatorId": 1,
+          "mapLink": "https://maps.google.com/maps?q=123%20Main%20Street,%20New%20York&t=&z=14&ie=UTF8&iwloc=B&output=embed",
+          "category": "Automotive",
+          "id": 1
         }
       ],
-      "active": true,
-      "id": 2
+      "id": 3
     },
     {
-      "image": "https://picsum.photos/200/300",
-      "title": "some business for cars22333",
-      "description": "Some good business for good cards and we also repair them and paint ",
-      "phone": "+2222222222",
-      "country": "Israel",
-      "city": "Ashdod",
-      "street": "dasdas",
-      "houseNumber": "12121",
-      "creatorId": 1,
-      "mapLink": "https://goo.gl/maps/r92XbRv378vFRRVPA",
-      "category": "cars",
-      "id": 3
+      "userId": 4,
+      "cards": [],
+      "id": 4
+    },
+    {
+      "userId": {
+        "firstName": "Ksenia",
+        "middleName": "idk",
+        "lastName": "Bobov",
+        "phone": "+2222222222",
+        "email": "Ksenia@gmail.com",
+        "password": "123123",
+        "imageUrl": "https://picsum.photos/200/300",
+        "imageAlt": "idk",
+        "state": "idk",
+        "country": "idk",
+        "city": "idk",
+        "street": "idk",
+        "houseNumber": 2,
+        "zip": 2,
+        "role": "isUser",
+        "id": 4
+      },
+      "cards": [],
+      "id": 5
+    },
+    {
+      "userId": [
+        {
+          "firstName": "Ksenia",
+          "middleName": "idk",
+          "lastName": "Bobov",
+          "phone": "+2222222222",
+          "email": "Ksenia@gmail.com",
+          "password": "123123",
+          "imageUrl": "https://picsum.photos/200/300",
+          "imageAlt": "idk",
+          "state": "idk",
+          "country": "idk",
+          "city": "idk",
+          "street": "idk",
+          "houseNumber": 2,
+          "zip": 2,
+          "role": "isUser",
+          "id": 4
+        }
+      ],
+      "cards": [],
+      "id": 6
+    },
+    {
+      "userId": [],
+      "cards": [],
+      "id": 7
+    },
+    {
+      "userId": [],
+      "cards": [],
+      "id": 8
     }
   ]
 }
