@@ -12,15 +12,45 @@ Personalized Dashboards: Customize your dashboard to focus on the metrics that m
 
 Usage
 
-1.Run the server by writing this command in the terminal :
-json-server --watch db.json --port 8000
-
-2.Install the following components by writting this command in the terminal:
+1.INSTALL
+Open the terminal and navigate to "BCard-Client" folder root, Run 'npm install' to get all required node_modules for the "BCard-Client".
+Open the terminal and navigate to "BCard-Server" folder root, Run 'npm install' to get all required node_modules for the "BCard-Server".
+Or Manually:
+Install the following components by writting this command in the terminal:
 npm i bootstrap axios fontawesome yup react-router-dom react-toastify formik react-switch lodash bcrypt chalk cors joi jsonwebtoken mongoose morgan roating-file-stream
 
-3.Start the development server: npm start
+2.Run the server by writing this command in the terminal :
+nodemon start
 
-4.Open your browser and navigate to http://localhost:3000 to see the website in action.
+3.
+DataBase connections -
+DB_LOCAL:
+
+Set the "MongoDB Connection string" in "BCard-Server\index.js" to use "process.env.DB_LOCAL"
+
+DB_ATLAS:
+
+Set the "MongoDB Connection string" in "BCard-Server\index.js" to use "process.env.DB_ATLAS"
+Make sure that in "myob-server.env" you update your Atlas connection string of the Atlas db in "DB_ATLAS".
+
+4.Start the development server: npm start
+
+5.Open your browser and navigate to http://localhost:3000 to see the website in action.
+
+Existing Users for test:
+
+1.Default User:
+Email: Default@gmail.com
+Password: 123123123
+
+2.Business User:
+Email: Business@gmail.com
+Password: 123123123
+
+3.Admin User:
+Email: Admin@gmail.com
+Password: 123123123
+
 
 Screenshots of few examples of pages on the website:
 Home page:
