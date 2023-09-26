@@ -1,49 +1,32 @@
-# Getting Started with Create React App
+About BCard.
+BCard is a cutting-edge B2B / B2P platform designed to revolutionize the way businesses interact and transact.
+Our platform leverages the power of React and TypeScript to provide a seamless and dynamic user experience.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Key Features
+Intuitive Interface: Our user-friendly interface ensures that businesses of all sizes can easily navigate and utilize the platform.
 
-## Available Scripts
+Real-time Collaboration: Foster collaboration among your team members and partners through real-time communication and document sharing.
 
-In the project directory, you can run:
+Personalized Dashboards: Customize your dashboard to focus on the metrics that matter the most to your business.
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm install`
-Install the following components:
+Usage
+1.Run the server by writing this command in the terminal :
+json-server --watch db.json --port 8000
+2.Install the following components by writting this command in the terminal:
 npm i bootstrap axios fontawesome yup react-router-dom react-toastify formik react-switch
-### `npm test`
+3.Start the development server: npm start
+4.Open your browser and navigate to http://localhost:3000 to see the website in action.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Screenshots of few examples of pages on the website:
+Home page:
+![image](https://github.com/298Ron/bcard/assets/132360307/092c8bb2-e5f2-4836-83aa-5f2fbbcf2a8d)
+About page:
+![image](https://github.com/298Ron/bcard/assets/132360307/e8072aca-5ac4-4f8d-9056-d6c49afdad65)
+Login page:
+![image](https://github.com/298Ron/bcard/assets/132360307/aa710967-7b61-48de-9a9b-36aaf04c23d2)
+Register page:
+![image](https://github.com/298Ron/bcard/assets/132360307/3fd2913b-4557-4278-85db-3ba54b932cc6)
+Cards page:
+![image](https://github.com/298Ron/bcard/assets/132360307/2f32c70b-db21-4659-8a50-110412d9693e)
+Card information page(Dark mode):
+![image](https://github.com/298Ron/bcard/assets/132360307/f3308e3e-2690-49ad-9935-8e639592a75a)
