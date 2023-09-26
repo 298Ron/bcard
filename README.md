@@ -14,9 +14,13 @@ Usage
 
 1.INSTALL
 Open the terminal and navigate to "BCard-Client" folder root, Run 'npm install' to get all required node_modules for the "BCard-Client".
+
 Open the terminal and navigate to "BCard-Server" folder root, Run 'npm install' to get all required node_modules for the "BCard-Server".
+
 Or Manually:
+
 Install the following components by writting this command in the terminal:
+
 npm i bootstrap axios fontawesome yup react-router-dom react-toastify formik react-switch lodash bcrypt chalk cors joi jsonwebtoken mongoose morgan roating-file-stream
 
 2.Run the server by writing this command in the terminal :
@@ -40,15 +44,21 @@ Make sure that in "myob-server.env" you update your Atlas connection string of t
 Existing Users for test:
 
 1.Default User:
+
 Email: Default@gmail.com
+
 Password: 123123123
 
 2.Business User:
+
 Email: Business@gmail.com
+
 Password: 123123123
 
 3.Admin User:
+
 Email: Admin@gmail.com
+
 Password: 123123123
 
 
