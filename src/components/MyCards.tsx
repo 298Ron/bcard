@@ -1,62 +1,63 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import Card from "../interfaces/Card";
-import { deleteCard, getCards } from "../services/cardService";
+import { deleteCard, getCardsByOwner } from "../services/cardService";
 import { successMsg } from "../services/feedbacksService";
-import { addToFavCards, getFavorites, removeFromFavorites } from "../services/favCardService";
+import { addRemoveFavorites, getFavorites } from "../services/favCardService";
 import { Link, useNavigate } from "react-router-dom";
 interface MyCardsProps {
     userInfo: any;
 }
 
 const MyCards: FunctionComponent<MyCardsProps> = ({ userInfo }) => {
-    let handleRemove = (cardId: number) => {
-        deleteCard(cardId)
-            .then((res) => {
-                render();
-                removeFromFavorites(userId, cardId)
-            })
-            .catch((err) => console.log(err)
-            )
-    }
-    let render = () => {
-        setCardsChanged(!cardChanged)
-    }
-    let navigate = useNavigate()
-    let [favorites, setFavorites] = useState<number[]>([])
-    let [cards, setCards] = useState<Card[]>([])
-    let [cardChanged, setCardsChanged] = useState<boolean>(false);
+    let navigate = useNavigate();
+    let [cards, setCards] = useState<Card[]>([]);
+    let [dataUpdated, setDataUpdated] = useState<boolean>(false);
+    let [favorites, setFavorites] = useState<string[]>([])
+    let render = () => setDataUpdated(!dataUpdated);
     let handleAddToFavorites = (card: Card) => {
-        if (favorites.includes(card.id as number)) {
-            removeFromFavorites(userInfo.userId, card.id as number)
+        if (favorites.includes(card._id as string)) {
+            addRemoveFavorites(card._id as string)
                 .then((res) => {
-                    setFavorites(favorites.filter((id) => id !== card.id));
+                    setFavorites(favorites.filter((_id) => _id !== card._id))
                     successMsg(`${card.title} business card was removed from favorites!`);
                 })
                 .catch((err) => { console.log(err); });
         } else {
-            addToFavCards(userInfo.userId, card)
+            addRemoveFavorites(card._id as string)
                 .then((res) => {
-                    setFavorites([...favorites, card.id as number]);
+                    setFavorites([...favorites, card._id as string]);
                     successMsg(`${card.title} business card was added to favorites!`);
                 })
                 .catch((err) => { console.log(err); });
         }
     };
+    let removeCard = (card: Card) => {
+        if (window.confirm("Are you sure?") === true) {
+            deleteCard(card._id as string)
+                .then((res) => {
+                    render();
+                    successMsg("Card deleted successfully!")
+                    navigate("/cards")
+                })
+                .catch((err) => console.log(err))
+        }
+    }
 
 
     useEffect(() => {
-        getFavorites(userInfo.userId).then((res) => {
-            let userFavorites = res.data.find((fav: any) => fav.userId === userInfo.userId);
+        if (userInfo.userId) {
+            getFavorites(userInfo.userId).then((res) => {
+                let defaultCardIds: string[] = res.data?.cards.map((card: any) => card._id) || [];
+                setFavorites(defaultCardIds)
+            }).catch((err) => console.log(err))
+        }
+        getCardsByOwner()
+            .then((res) => {
+                setCards(res.data)
+            })
+            .catch((err) => console.log(err));
+    }, [dataUpdated, userInfo.userId]);
 
-            let defaultCardIds: number[] = userFavorites?.cards.map((card: any) => card.id) || [];
-
-            setFavorites(defaultCardIds)
-        }).catch((err) => console.log(err))
-        getCards().then((res) => setCards(res.data)).catch((err) => console.log(err));
-
-    }, [cardChanged, userInfo.userId]);
-
-    let userId: number = JSON.parse(sessionStorage.getItem("userInfo") as string).userId
 
     return (
         <>
@@ -67,12 +68,12 @@ const MyCards: FunctionComponent<MyCardsProps> = ({ userInfo }) => {
                     {cards.length ? (
                         <div className="row" style={{ margin: "0 auto" }}>
                             {cards.map((card: Card) => (
-                                <div className="card my-3 col-md-4 shadow" style={{ width: "18rem", margin: "0 auto" }} key={card.id} >
-                                    <img src={card.image} onClick={() => navigate(`info/${card.id}`)} className="card-img-top object-fit-cover mt-3" alt={card.title} style={{ width: "16.5rem", height: "16.5rem" }} />
+                                <div className="card my-3 col-md-4 shadow" style={{ width: "18rem", margin: "0 auto" }} key={card._id as string} >
+                                    <img src={card.image} onClick={() => navigate(`info/${card._id}`)} className="card-img-top object-fit-cover mt-3" alt={card.title} style={{ width: "16.5rem", height: "16.5rem" }} />
                                     <div className="card-body">
                                         <h5 className="card-title">{card.title}</h5>
                                         <p className="card-text">{card.category}</p>
-                                        {userInfo.email && (favorites.includes(card.id as number) ? (
+                                        {userInfo.email && (favorites.includes(card._id as string) ? (
                                             <Link to="" className="btn col text-success" onClick={() => {
                                                 handleAddToFavorites(card);
                                             }}    >
@@ -83,15 +84,15 @@ const MyCards: FunctionComponent<MyCardsProps> = ({ userInfo }) => {
                                                 <i className="fa-solid fa-heart"></i>
                                             </Link>)
                                         )}
-                                        {(userInfo.role == "isAdmin" || userId === card.creatorId) && (<Link to={`/cards/edit/s${card.id}`}><i className="fa-solid fa-pen mx-5 text-warning"></i></Link>)}
-                                        {(userInfo.role == "isAdmin" || userId === card.creatorId) && (<Link to="" onClick={() => handleRemove(Number(card.id))} ><i className="fa-solid fa-trash text-danger ms-3" ></i></Link>)}
+                                        {((userInfo.role === "isAdmin") || (userInfo.userId === card.creatorId)) && (<Link to={`/cards/edit/${card._id as string}`}><i className="fa-solid fa-pen mx-5 text-warning"></i></Link>)}
+                                        {((userInfo.role === "isAdmin") || (userInfo.userId === card.creatorId)) && (<Link to="" onClick={() => removeCard(card)} ><i className="fa-solid fa-trash text-danger ms-3" ></i></Link>)}
                                     </div>
                                 </div>
                             ))}
                         </div>
                     ) : (<p style={{ height: "40vh" }}>There is no cards to display</p>)}
                 </div>
-                {(userInfo.role == "isBusiness" || userInfo.role == "isAdmin") && (<Link to="add" className="btn text-light rounded-5 fw-bold position-fixed end-0 m-3 newCard" style={{ top: "70%" }}><i className="fa-solid fa-plus me-2"></i>Add card</Link>)}
+                {(userInfo.role === "isBusiness" || userInfo.role === "isAdmin") && (<Link to="add" className="btn text-light rounded-5 fw-bold position-fixed end-0 m-3 newCard" style={{ top: "70%" }}><i className="fa-solid fa-plus me-2"></i>Add card</Link>)}
             </div>
 
         </>

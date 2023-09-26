@@ -2,17 +2,16 @@ import { useFormik } from "formik";
 import { FunctionComponent, useEffect, useState } from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import * as yup from "yup"
-import { getCards, getCardsById, updateCard } from "../services/cardService";
+import { getCardsById, updateCard } from "../services/cardService";
 import { successMsg } from "../services/feedbacksService";
 import Card from "../interfaces/Card";
-import { updateFavCard } from "../services/favCardService";
 interface UpdateCardProps {
     userInfo: any
 }
 
 const UpdateCard: FunctionComponent<UpdateCardProps> = ({ userInfo }) => {
     const params = useParams();
-
+    let { id } = useParams();
     let [card, setCard] = useState<Card>({
         image: "",
         title: "",
@@ -21,7 +20,7 @@ const UpdateCard: FunctionComponent<UpdateCardProps> = ({ userInfo }) => {
         country: "",
         city: "",
         street: "",
-        creatorId: 0,
+        creatorId: "",
         houseNumber: "",
         mapLink: "",
         category: ""
@@ -30,11 +29,11 @@ const UpdateCard: FunctionComponent<UpdateCardProps> = ({ userInfo }) => {
 
     useEffect(() => {
         // get product by id
-        getCardsById(Number(params.id))
+        getCardsById(params.id as string)
             .then((res) => setCard(res.data))
             .catch((err) => console.log(err))
-    }, []);
-    let { id } = useParams();
+    }, [params.id]);
+
     let navigate = useNavigate()
     let formik = useFormik({
         initialValues: { image: card.image, title: card.title, description: card.description, phone: card.phone, country: card.country, city: card.city, street: card.street, houseNumber: card.houseNumber, creatorId: card.creatorId, mapLink: card.mapLink, category: card.category },
@@ -43,23 +42,23 @@ const UpdateCard: FunctionComponent<UpdateCardProps> = ({ userInfo }) => {
             image: yup.string().url(),
             title: yup.string().required().min(2),
             description: yup.string().required().min(2),
-            phone: yup.string().required().min(9).max(12),
+            phone: yup.string().required().min(9).max(14),
             country: yup.string().required().min(3),
             city: yup.string().required().min(3),
             street: yup.string().required().min(3),
-            houseNumber: yup.string().required().min(3),
+            houseNumber: yup.string().required().min(1),
+            category: yup.string().required(),
         }),
         enableReinitialize: true,
         onSubmit(values) {
-            updateCard(values, Number(id));
-            updateFavCard(values, Number(id))
+            updateCard(values, id as string)
                 .then((res) => {
-
+                    successMsg("Card was updated successfully!")
                     navigate("/cards")
-                    successMsg("Card was updated successfuly!");
-
                 })
-                .catch((err) => console.log(err))
+                .catch((err) => console.log(err)
+                )
+
         }
     })
     let clear = () => {
@@ -117,6 +116,17 @@ const UpdateCard: FunctionComponent<UpdateCardProps> = ({ userInfo }) => {
                                 {formik.touched.phone && formik.errors.phone && (
                                     <small className="text-danger">{formik.errors.phone}</small>)}
                             </div>
+                            <div className="form-floating mb-3">
+                                <input type="text"
+                                    name="category"
+                                    className="form-control shadow" placeholder="category"
+                                    onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    value={formik.values.category} />
+                                <label className="darkText" >Category</label>
+                                {formik.touched.category && formik.errors.category && (
+                                    <small className="text-danger">{formik.errors.category}</small>)}
+                            </div>
                         </div>
                         {/*RIGHT COLUMN*/}
                         <div className="col-md-6">
@@ -164,18 +174,19 @@ const UpdateCard: FunctionComponent<UpdateCardProps> = ({ userInfo }) => {
                                 {formik.touched.houseNumber && formik.errors.houseNumber && (
                                     <small className="text-danger">{formik.errors.houseNumber}</small>)}
                             </div>
+                            <div className="form-floating mb-3">
+                                <input type="text"
+                                    name="mapLink"
+                                    className="form-control" placeholder="Map URL"
+                                    onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    value={formik.values.mapLink} />
+                                <label className="darkText ms-2" >Map URL</label>
+                                {formik.touched.mapLink && formik.errors.mapLink && (
+                                    <small className="text-danger">{formik.errors.mapLink}</small>)}
+                            </div>
                         </div>
-                        <div className="form-floating mb-3 container col-md-6">
-                            <input type="text"
-                                name="mapLink"
-                                className="form-control" placeholder="Map URL"
-                                onChange={formik.handleChange}
-                                onBlur={formik.handleBlur}
-                                value={formik.values.mapLink} />
-                            <label className="darkText ms-2" >Map URL</label>
-                            {formik.touched.mapLink && formik.errors.mapLink && (
-                                <small className="text-danger">{formik.errors.mapLink}</small>)}
-                        </div>
+
                     </div>
                     <button type="submit" className="btn btn-success w-50 mb-3" disabled={!formik.isValid || !formik.dirty}>Update card</button>
                 </form>

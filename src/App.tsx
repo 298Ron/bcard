@@ -1,5 +1,4 @@
-import React, { createContext, useState } from 'react';
-import logo from './logo.svg';
+import { createContext, useState } from 'react';
 import './App.css';
 import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -15,8 +14,6 @@ import UpdateCard from './components/UpdateCard';
 import FavCards from './components/FavCards';
 import Profile from './components/Profile';
 import About from './components/About';
-import Card from './interfaces/Card';
-import ReactSwitch from 'react-switch';
 import CardsInfo from './components/CardsInfo';
 export let ThemeContext: any = createContext(null);
 function App() {
@@ -25,7 +22,6 @@ function App() {
   const toggleTheme = () => {
     setTheme((curr) => (curr === "light" ? "dark" : "light"));
   }
-
   let [userInfo, setUserInfo] = useState(
     JSON.parse(sessionStorage.getItem("userInfo") as string) == null
       ? { email: false, isAdmin: false }
@@ -39,13 +35,13 @@ function App() {
           <Navbar userInfo={userInfo} setUserInfo={setUserInfo} theme={theme} toggleTheme={toggleTheme} />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/profile" element={<Profile userInfo={userInfo} />} />
+            <Route path="/profile/:id" element={<Profile setUserInfo={setUserInfo} userInfo={userInfo} />} />
             <Route path="/login" element={<Login setUserInfo={setUserInfo} />} />
-            <Route path="/register" element={<Register />} />
+            <Route path="/register" element={<Register setUserInfo={setUserInfo} />} />
             <Route path="/about" element={<About />} />
             <Route path="/cards" element={<MyCards userInfo={userInfo} />} />
             <Route path="/cards/info/:id" element={<CardsInfo userInfo={userInfo} />} />
-            <Route path="/cards/favorites/:id" element={<FavCards userInfo={userInfo} />} />
+            <Route path="/favorites" element={<FavCards userInfo={userInfo} />} />
             <Route path="/cards/add" element={<NewCard userInfo={userInfo} />} />
             <Route path="/cards/edit/:id" element={<UpdateCard userInfo={userInfo} />} />
             <Route path='*' element={<PageNotFound />} />

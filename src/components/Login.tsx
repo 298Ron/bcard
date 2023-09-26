@@ -1,6 +1,6 @@
 import { FunctionComponent } from "react";
 import { useFormik } from "formik";
-import { checkUser } from "../services/usersService";
+import { checkUser, getTokenDetails } from "../services/usersService";
 import * as yup from "yup";
 import { NavLink, useNavigate } from "react-router-dom";
 import { errorMsg, successMsg } from "../services/feedbacksService";
@@ -17,29 +17,44 @@ const Login: FunctionComponent<LoginProps> = ({ setUserInfo }) => {
             email: yup.string().required().email(),
             password: yup.string().required().min(6),
         }),
-        onSubmit(values,) {
+        onSubmit(values) {
             checkUser(values)
                 .then((res) => {
-                    if (res.data.length) {
-                        navigate("/");
-                        successMsg(`You're logged in as ${values.email}`);
-                        sessionStorage.setItem(
-                            "userInfo",
-                            JSON.stringify({
-                                imageURL: res.data[0].imageUrl,
-                                email: res.data[0].email,
-                                role: res.data[0].role,
-                                userId: res.data[0].id
+                    navigate("/");
+                    successMsg(`You're logged in as ${values.email}`);
+                    sessionStorage.setItem(
+                        "token",
+                        JSON.stringify({
+                            token: res.data,
+                        }
+                        )
 
-                            })
-                        );
-                        setUserInfo(
-                            JSON.parse(sessionStorage.getItem("userInfo") as string)
-                        );
-                    } else errorMsg("Wrong email or password")
+                    );
+
+
+                    sessionStorage.setItem(
+                        "userInfo",
+                        JSON.stringify({
+                            email: (getTokenDetails() as any).email,
+                            userId: (getTokenDetails() as any)._id,
+                            role: (getTokenDetails() as any).role,
+                            imageUrl: (getTokenDetails() as any).imageUrl,
+                        }
+
+                        )
+
+                    );
+                    setUserInfo(
+                        JSON.parse(sessionStorage.getItem("userInfo") as string)
+                    );
+
+
                 })
 
-                .catch((err) => console.log(err));
+                .catch((err) => {
+                    console.log(err)
+                    errorMsg("Wrong email or password")
+                });
         },
 
     })

@@ -1,21 +1,19 @@
 import { useFormik } from "formik";
-import { FunctionComponent, useState } from "react";
+import { FunctionComponent } from "react";
 import * as yup from "yup";
-import { CheckEmail, addUser } from "../services/usersService";
+import { addUser, getTokenDetails } from "../services/usersService";
 import { useNavigate } from "react-router-dom";
-import { errorMsg, successMsg } from "../services/feedbacksService";
-import { createFavCardList } from "../services/favCardService";
-import { userInfo } from "os";
+import { successMsg } from "../services/feedbacksService";
 import User from "../interfaces/User";
 interface RegisterProps {
-
+    setUserInfo: Function;
 }
 
-const Register: FunctionComponent<RegisterProps> = () => {
+const Register: FunctionComponent<RegisterProps> = ({ setUserInfo }) => {
 
     let navigate = useNavigate()
     let formik = useFormik({
-        initialValues: { firstName: "", middleName: "", lastName: "", phone: "", email: "", password: "", imageUrl: "", imageAlt: "", state: "", country: "", city: "", street: "", houseNumber: 0, zip: 0, role: "isUser", },
+        initialValues: { firstName: "", middleName: "", lastName: "", phone: "", email: "", password: "", imageUrl: "", imageAlt: "", state: "", country: "", city: "", street: "", houseNumber: "", zip: "", role: "isUser", },
         validationSchema: yup.object({
             firstName: yup.string().required().min(2),
             middleName: yup.string().min(2),
@@ -29,32 +27,34 @@ const Register: FunctionComponent<RegisterProps> = () => {
             country: yup.string().required().min(2),
             city: yup.string().required().min(2),
             street: yup.string().required().min(2),
-            houseNumber: yup.number().required().min(1),
-            zip: yup.number().min(2),
+            houseNumber: yup.string().required().min(1),
+            zip: yup.string().min(2),
             isBuisnesUser: yup.boolean(),
         }),
         onSubmit(values: User) {
-            CheckEmail(values)
+            addUser(values)
                 .then((res) => {
-                    if (res.data.length) {
-                        errorMsg("Email is already exist")
-                    } else {
-                        addUser(values)
-                        sessionStorage.setItem(
-                            "userInfo",
-                            JSON.stringify({
-                                imgURL: res.data.imageUrl,
-                                email: res.data.email,
-                                userId: res.data.id,
-                                role: res.data.role
-                            }
-                            )
-                        );
-
-                        successMsg(`${values.email} was registered!`);
-                        createFavCardList(res.data);
-                        navigate("/login")
-                    }
+                    navigate("/");
+                    successMsg(`${values.email} was registered!`);
+                    sessionStorage.setItem(
+                        "token",
+                        JSON.stringify({
+                            token: res.data,
+                        })
+                    );
+                    sessionStorage.setItem(
+                        "userInfo",
+                        JSON.stringify({
+                            email: (getTokenDetails() as any).email,
+                            userId: (getTokenDetails() as any)._id,
+                            role: (getTokenDetails() as any).role,
+                            imageUrl: (getTokenDetails() as any).imageUrl,
+                        }
+                        )
+                    );
+                    setUserInfo(
+                        JSON.parse(sessionStorage.getItem("userInfo") as string)
+                    );
                 }).catch((err) => console.log(err)
                 )
 
@@ -74,9 +74,10 @@ const Register: FunctionComponent<RegisterProps> = () => {
                         <div className="form-floating mb-3">
                             <input type="text" className="form-control shadow mb-2"
                                 name="firstName"
+
                                 id="floatingFirstName"
-                                value={formik.values.firstName}
                                 onChange={formik.handleChange}
+                                value={formik.values.firstName}
                                 onBlur={formik.handleBlur}
                                 placeholder="First name" />
                             <label className="darkText" htmlFor="floatingInputFirstName">First name</label>
@@ -87,8 +88,9 @@ const Register: FunctionComponent<RegisterProps> = () => {
                             <input type="text" className="form-control shadow mb-2"
                                 name="lastName"
                                 id="floatingLastName"
-                                value={formik.values.lastName}
                                 onChange={formik.handleChange}
+                                value={formik.values.lastName}
+
                                 onBlur={formik.handleBlur}
                                 placeholder="Last Name" />
                             <label className="darkText" htmlFor="floatingLastName">Last Name</label>
@@ -99,8 +101,9 @@ const Register: FunctionComponent<RegisterProps> = () => {
                             <input type="email" className="form-control shadow mb-2"
                                 name="email"
                                 id="floatingEmail"
-                                value={formik.values.email}
                                 onChange={formik.handleChange}
+                                value={formik.values.email}
+
                                 onBlur={formik.handleBlur}
                                 placeholder="Email" />
                             <label className="darkText" htmlFor="floatingEmail">Email</label>
@@ -111,8 +114,9 @@ const Register: FunctionComponent<RegisterProps> = () => {
                             <input type="text" className="form-control shadow mb-2"
                                 name="imageUrl"
                                 id="floatingImageUrl"
-                                value={formik.values.imageUrl}
                                 onChange={formik.handleChange}
+                                value={formik.values.imageUrl}
+
                                 onBlur={formik.handleBlur}
                                 placeholder="Image url" />
                             <label className="darkText" htmlFor="floatingImageUrl">Image url</label>
@@ -123,8 +127,9 @@ const Register: FunctionComponent<RegisterProps> = () => {
                             <input type="text" className="form-control shadow mb-2"
                                 name="state"
                                 id="floatingState"
-                                value={formik.values.state}
                                 onChange={formik.handleChange}
+                                value={formik.values.state}
+
                                 onBlur={formik.handleBlur}
                                 placeholder="State" />
                             <label className="darkText" htmlFor="floatingState">State</label>
@@ -135,8 +140,9 @@ const Register: FunctionComponent<RegisterProps> = () => {
                             <input type="text" className="form-control shadow mb-2"
                                 name="city"
                                 id="floatingCity"
-                                value={formik.values.city}
                                 onChange={formik.handleChange}
+                                value={formik.values.city}
+
                                 onBlur={formik.handleBlur}
                                 placeholder="City" />
                             <label className="darkText" htmlFor="floatingCity">City</label>
@@ -147,8 +153,9 @@ const Register: FunctionComponent<RegisterProps> = () => {
                             <input type="number" className="form-control shadow mb-2"
                                 name="houseNumber"
                                 id="floatingHouseNumber"
-                                value={formik.values.houseNumber}
                                 onChange={formik.handleChange}
+                                value={formik.values.houseNumber}
+
                                 onBlur={formik.handleBlur}
                                 placeholder="House number" />
                             <label className="darkText" htmlFor="floatingHouseNumber">House number</label>
@@ -162,8 +169,9 @@ const Register: FunctionComponent<RegisterProps> = () => {
                             <input type="text" className="form-control shadow mb-2"
                                 name="middleName"
                                 id="floatingMiddleName"
-                                value={formik.values.middleName}
                                 onChange={formik.handleChange}
+                                value={formik.values.middleName}
+
                                 onBlur={formik.handleBlur}
                                 placeholder="Middle name" />
                             <label className="darkText" htmlFor="floatingMiddleName">Middle name</label>
@@ -174,8 +182,9 @@ const Register: FunctionComponent<RegisterProps> = () => {
                             <input type="text" className="form-control shadow mb-2"
                                 name="phone"
                                 id="floatingPhone"
-                                value={formik.values.phone}
                                 onChange={formik.handleChange}
+                                value={formik.values.phone}
+
                                 onBlur={formik.handleBlur}
                                 placeholder="Phone" />
                             <label className="darkText" htmlFor="floatingPhone">Phone</label>
@@ -186,8 +195,9 @@ const Register: FunctionComponent<RegisterProps> = () => {
                             <input type="password" className="form-control shadow mb-2"
                                 name="password"
                                 id="floatingPassword"
-                                value={formik.values.password}
                                 onChange={formik.handleChange}
+                                value={formik.values.password}
+
                                 onBlur={formik.handleBlur}
                                 placeholder="password" />
                             <label className="darkText" htmlFor="floatingPassword">password</label>
@@ -198,8 +208,9 @@ const Register: FunctionComponent<RegisterProps> = () => {
                             <input type="text" className="form-control shadow mb-2"
                                 name="imageAlt"
                                 id="floatingImageAlt"
-                                value={formik.values.imageAlt}
                                 onChange={formik.handleChange}
+                                value={formik.values.imageAlt}
+
                                 onBlur={formik.handleBlur}
                                 placeholder="Image alt" />
                             <label className="darkText" htmlFor="floatingImageAlt">Image alt</label>
@@ -210,8 +221,9 @@ const Register: FunctionComponent<RegisterProps> = () => {
                             <input type="text" className="form-control shadow mb-2"
                                 name="country"
                                 id="floatingCountry"
-                                value={formik.values.country}
                                 onChange={formik.handleChange}
+                                value={formik.values.country}
+
                                 onBlur={formik.handleBlur}
                                 placeholder="Country" />
                             <label className="darkText" htmlFor="floatingCountry">Country</label>
@@ -222,8 +234,9 @@ const Register: FunctionComponent<RegisterProps> = () => {
                             <input type="text" className="form-control shadow mb-2"
                                 name="street"
                                 id="floating"
-                                value={formik.values.street}
                                 onChange={formik.handleChange}
+                                value={formik.values.street}
+
                                 onBlur={formik.handleBlur}
                                 placeholder="Street" />
                             <label className="darkText" htmlFor="floatingStreet">Street</label>
@@ -234,8 +247,9 @@ const Register: FunctionComponent<RegisterProps> = () => {
                             <input type="number" className="form-control shadow mb-2"
                                 name="zip"
                                 id="floatingZip"
-                                value={formik.values.zip}
                                 onChange={formik.handleChange}
+                                value={formik.values.zip}
+
                                 onBlur={formik.handleBlur}
                                 placeholder="Zip" />
                             <label className="darkText" htmlFor="floatingZip">Zip</label>

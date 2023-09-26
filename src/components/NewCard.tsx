@@ -24,7 +24,7 @@ const NewCard: FunctionComponent<NewCardProps> = ({ userInfo }) => {
             country: yup.string().required().min(3),
             city: yup.string().required().min(3),
             street: yup.string().required().min(3),
-            houseNumber: yup.string().required().min(3),
+            houseNumber: yup.string().required().min(1),
             mapLink: yup.string().required().url(),
             category: yup.string().required(),
         }),

@@ -9,21 +9,34 @@ export function getCards() {
 }
 
 // Get Specific Card by id
-export function getCardsById(id: number) {
-    return axios.get(`${api}/${id}`);
+export function getCardsById(_id: string) {
+    return axios.get(`${api}/${_id}`, { headers: { Authorization: JSON.parse(sessionStorage.getItem("token") as string).token } });
 }
+
 
 // Post new Card
 export function addCard(newCard: Card) {
-    return axios.post(api, newCard);
+    return axios.post(`${api}`, newCard, {
+        headers: {
+            Authorization: JSON.parse(sessionStorage.getItem("token") as string
+            ).token,
+        }
+    });
 }
-
-// Put Card by id
-export function updateCard(updateCard: Card, id: number) {
-    return axios.put(`${api}/${id}`, updateCard);
+export function getCardsByOwner() {
+    return axios.get(`${api}`, { headers: { Authorization: JSON.parse(sessionStorage.getItem("token") as string).token } });
+}
+// Put Card by _id
+export function updateCard(updateCard: Card, _id: string) {
+    return axios.put(`${api}/${_id}`, updateCard, {
+        headers: {
+            Authorization: JSON.parse(sessionStorage.getItem("token") as string
+            ).token,
+        }
+    });
 }
 
 // Delete Card by id
-export function deleteCard(id: number) {
-    return axios.delete(`${api}/${id}`)
+export function deleteCard(_id: string) {
+    return axios.delete(`${api}/${_id}`, { headers: { Authorization: JSON.parse(sessionStorage.getItem("token") as string).token } });
 }

@@ -8,9 +8,9 @@ export default interface Card {
     city: string;
     street: string;
     houseNumber: string;
-    creatorId?: number;
+    creatorId?: string;
     userAddedToFavoritesId?: number,
-    id?: number;
+    _id?: string;
     mapLink?: string;
     category: string;
 };

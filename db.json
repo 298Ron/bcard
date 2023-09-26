@@ -206,17 +206,31 @@
       "cards": [
         {
           "image": "https://picsum.photos/200/300",
-          "title": "XYZ Coffee Shop",
-          "description": "Relax and enjoy a variety of handcrafted coffees and pastries.",
-          "phone": "+44 20 1234 5678",
+          "title": "Fit & Active Gym",
+          "description": "Achieve your fitness goals with our state-of-the-art equipment and expert trainers.",
+          "phone": "+44 20 5555 6789",
           "country": "United Kingdom",
-          "city": "London",
-          "street": "456 High Street",
-          "houseNumber": "22",
+          "city": "Manchester",
+          "street": "456 Fitness Lane",
+          "houseNumber": "10",
           "creatorId": 1,
-          "mapLink": "https://maps.google.com/maps?q=456%20High%20Street,%20London&t=&z=14&ie=UTF8&iwloc=B&output=embed",
-          "category": "Food & Beverage",
-          "id": 2
+          "mapLink": "https://maps.google.com/maps?q=456%20Fitness%20Lane,%20Manchester&t=&z=14&ie=UTF8&iwloc=B&output=embed",
+          "category": "Fitness",
+          "id": 7
+        },
+        {
+          "image": "https://picsum.photos/200/300",
+          "title": "Cozy Bookstore",
+          "description": "Discover your next favorite book in our cozy and welcoming bookstore.",
+          "phone": "+1 (555) 123-4567",
+          "country": "United States",
+          "city": "San Francisco",
+          "street": "789 Book Avenue",
+          "houseNumber": "3",
+          "creatorId": 1,
+          "mapLink": "https://maps.google.com/maps?q=789%20Book%20Avenue,%20San%20Francisco&t=&z=14&ie=UTF8&iwloc=B&output=embed",
+          "category": "Books",
+          "id": 6
         }
       ],
       "id": 1
@@ -277,7 +291,36 @@
     },
     {
       "userId": 4,
-      "cards": [],
+      "cards": [
+        {
+          "image": "https://picsum.photos/200/300",
+          "title": "XYZ Coffee Shop",
+          "description": "Relax and enjoy a variety of handcrafted coffees and pastries.",
+          "phone": "+44 20 1234 5678",
+          "country": "United Kingdom",
+          "city": "London",
+          "street": "456 High Street",
+          "houseNumber": "22",
+          "creatorId": 1,
+          "mapLink": "https://maps.google.com/maps?q=456%20High%20Street,%20London&t=&z=14&ie=UTF8&iwloc=B&output=embed",
+          "category": "Food & Beverage",
+          "id": 2
+        },
+        {
+          "image": "https://picsum.photos/200/300",
+          "title": "ABC Car Dealership",
+          "description": "We sell new and used cars at competitive prices.",
+          "phone": "+1 (123) 456-7890",
+          "country": "United States",
+          "city": "New York",
+          "street": "123 Main Street",
+          "houseNumber": "555",
+          "creatorId": 1,
+          "mapLink": "https://maps.google.com/maps?q=123%20Main%20Street,%20New%20York&t=&z=14&ie=UTF8&iwloc=B&output=embed",
+          "category": "Automotive",
+          "id": 1
+        }
+      ],
       "id": 4
     },
     {

@@ -1,6 +1,4 @@
 import { FunctionComponent } from "react";
-import { useNavigate } from "react-router-dom";
-
 interface pageNotFoundProps {
 
 }
@@ -9,8 +7,7 @@ const pageNotFound: FunctionComponent<pageNotFoundProps> = () => {
 
     return (
         <>
-            <h1 className="display-1">404 - Page Not Found</h1>
-
+            <h1 className="display-1" style={{ height: "70vh", paddingTop: "10%" }}>404 - Page Not Found</h1>
         </>
     )
 }

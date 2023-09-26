@@ -12,7 +12,7 @@ export default interface User {
     country: string;
     city: string;
     street?: string;
-    houseNumber?: number;
-    zip?: number;
+    houseNumber?: string;
+    zip?: string;
     role?: string;
 }
