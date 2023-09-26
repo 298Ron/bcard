@@ -1,4 +1,5 @@
 About BCard.
+
 BCard is a cutting-edge B2B / B2P platform designed to revolutionize the way businesses interact and transact.
 Our platform leverages the power of React and TypeScript to provide a seamless and dynamic user experience.
 
